@@ -27,7 +27,7 @@
 
 ---
 
-## ♟️ About The Project
+## About The Project
 
 **Gambits.in** is the upcoming training ground for the boldest players on the board. 
 
@@ -35,7 +35,7 @@ While modern engines strive for "0.00" equality, we believe chess is a battle of
 
 **Current Status:** Pre-launch (2026)
 
-## 🕯️ Philosophy: The Art of Sacrifice
+## Philosophy: The Art of Sacrifice
 
 > "You must take your opponent into a deep dark forest where 2+2=5, and the path leading out is only wide enough for one." — **Mikhail Tal**
 
@@ -47,7 +47,7 @@ In an era dominated by engine preparation and dry positional play, we are bringi
 
 We are building the home for the "Magicians" of the next generation.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 This repository contains the source code for the high-performance landing page, showcasing modern web development practices:
 
@@ -56,7 +56,7 @@ This repository contains the source code for the high-performance landing page, 
 *   **Visuals**: Custom HTML5 Canvas implementation for the "Neural Tactics" background.
 *   **Performance**: Static export optimized for edge delivery on Vercel.
 
-## 👤 Author
+## Author
 
 **Ripuranjan Baruah**
 
