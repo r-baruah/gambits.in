@@ -17,8 +17,8 @@ const InteractiveBackground = () => {
     let height = window.innerHeight;
     
     // Configuration
-    const particleCount = Math.min(Math.floor((width * height) / 10000), 150); // Increased density
-    const connectionDistance = 160;
+    const particleCount = Math.min(Math.floor((width * height) / 12000), 120);
+    const connectionDistance = 180;
     const mouseDistance = 250;
     const particles: Particle[] = [];
     const ripples: Ripple[] = [];
@@ -61,21 +61,25 @@ const InteractiveBackground = () => {
         this.x = x;
         this.y = y;
         this.radius = 0;
-        this.alpha = 1;
+        this.alpha = 0.8;
       }
 
       update() {
-        this.radius += 5;
-        this.alpha -= 0.02;
+        this.radius += 4;
+        this.alpha -= 0.015;
       }
 
       draw() {
         if (!ctx) return;
+        ctx.save();
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(34, 197, 94, ${this.alpha * 0.5})`;
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = `rgba(34, 197, 94, ${this.alpha})`;
+        ctx.lineWidth = 1.5;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = '#22c55e';
         ctx.stroke();
+        ctx.restore();
       }
     }
 
@@ -85,26 +89,28 @@ const InteractiveBackground = () => {
       vx: number;
       vy: number;
       size: number;
-      baseX: number;
-      baseY: number;
+      baseSpeed: number;
 
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.8; 
-        this.vy = (Math.random() - 0.5) * 0.8;
+        // Ensure non-zero base velocity for constant movement
+        this.baseSpeed = Math.random() * 0.5 + 0.2;
+        const angle = Math.random() * Math.PI * 2;
+        this.vx = Math.cos(angle) * this.baseSpeed;
+        this.vy = Math.sin(angle) * this.baseSpeed;
         this.size = Math.random() * 2.5 + 0.5;
-        this.baseX = this.x;
-        this.baseY = this.y;
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
 
-        // Wall bounce
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
+        // Wrap around screen for continuous flow (instead of bounce)
+        if (this.x < -50) this.x = width + 50;
+        if (this.x > width + 50) this.x = -50;
+        if (this.y < -50) this.y = height + 50;
+        if (this.y > height + 50) this.y = -50;
 
         // Mouse interaction (repulsion)
         const dx = mouse.x - this.x;
@@ -115,7 +121,7 @@ const InteractiveBackground = () => {
           const forceDirectionX = dx / distance;
           const forceDirectionY = dy / distance;
           const force = (mouseDistance - distance) / mouseDistance;
-          const repulsionStrength = 0.08;
+          const repulsionStrength = 0.15; // Stronger repulsion
 
           this.vx -= forceDirectionX * force * repulsionStrength;
           this.vy -= forceDirectionY * force * repulsionStrength;
@@ -126,24 +132,43 @@ const InteractiveBackground = () => {
           const rdx = ripple.x - this.x;
           const rdy = ripple.y - this.y;
           const rDist = Math.sqrt(rdx * rdx + rdy * rdy);
-          if (Math.abs(rDist - ripple.radius) < 20) {
+          // Check if particle is near the ripple ring
+          if (Math.abs(rDist - ripple.radius) < 30) {
              const angle = Math.atan2(rdy, rdx);
-             this.vx -= Math.cos(angle) * 0.5;
-             this.vy -= Math.sin(angle) * 0.5;
+             // Push outwards
+             this.vx -= Math.cos(angle) * 0.8;
+             this.vy -= Math.sin(angle) * 0.8;
           }
         });
         
-        // Friction to stabilize speed
-        this.vx *= 0.99;
-        this.vy *= 0.99;
+        // Normalize speed gradually to keep them moving but not too fast
+        const currentSpeed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        const targetSpeed = this.baseSpeed;
+        
+        // If too fast, slow down. If too slow, speed up.
+        if (currentSpeed > targetSpeed * 4) {
+             this.vx *= 0.95;
+             this.vy *= 0.95;
+        } else if (currentSpeed < targetSpeed * 0.5) {
+             this.vx *= 1.05;
+             this.vy *= 1.05;
+        }
       }
 
       draw() {
         if (!ctx) return;
-        ctx.fillStyle = 'rgba(34, 197, 94, 0.6)'; 
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(34, 197, 94, ${0.4 + (this.size / 3) * 0.4})`; // Larger particles are brighter
         ctx.fill();
+        
+        // Subtle glow for larger particles
+        if (this.size > 2) {
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#22c55e';
+        } else {
+            ctx.shadowBlur = 0;
+        }
       }
     }
 
@@ -175,6 +200,7 @@ const InteractiveBackground = () => {
 
       // Draw connections
       ctx.lineWidth = 0.5;
+      ctx.shadowBlur = 0; // Reset shadow for lines to save perf
 
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -185,7 +211,7 @@ const InteractiveBackground = () => {
           if (distance < connectionDistance) {
             // Opacity based on distance
             const opacity = 1 - (distance / connectionDistance);
-            ctx.strokeStyle = `rgba(34, 197, 94, ${opacity * 0.2})`;
+            ctx.strokeStyle = `rgba(34, 197, 94, ${opacity * 0.25})`;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);

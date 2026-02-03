@@ -1,21 +1,13 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Chess Knight piece in minimalist style -->
-  <rect width="32" height="32" fill="#0a0a0a"/>
-  <path d="M8 26h16v2H8v-2z" fill="#22c55e"/>
-  <path d="M10 24h12v2H10v-2z" fill="#22c55e"/>
-  <path d="M11 22h10v2H11v-2z" fill="#22c55e"/>
-  <path d="M12 20h8v2h-8v-2z" fill="#22c55e"/>
-  <path d="M13 18h6v2h-6v-2z" fill="#22c55e"/>
-  <path d="M14 16h4v2h-4v-2z" fill="#22c55e"/>
-  <path d="M15 14h2v2h-2v-2z" fill="#22c55e"/>
-  <path d="M14 12h4v2h-4v-2z" fill="#22c55e"/>
-  <path d="M13 10h6v2h-6v-2z" fill="#22c55e"/>
-  <path d="M12 8h8v2h-8v-2z" fill="#22c55e"/>
-  <path d="M11 6h10v2H11V6z" fill="#22c55e"/>
-  <path d="M10 4h12v2H10V4z" fill="#22c55e"/>
-  <!-- Knight's distinctive shape -->
-  <path d="M16 6h4v2h-4V6z" fill="#0a0a0a"/>
-  <path d="M18 8h2v2h-2V8z" fill="#0a0a0a"/>
-  <path d="M17 10h3v2h-3v-2z" fill="#0a0a0a"/>
-  <path d="M16 12h2v2h-2v-2z" fill="#0a0a0a"/>
+<svg width="32" height="32" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16a34a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path d="M120 440 L392 440 L412 470 L100 470 Z" fill="url(#grad)" />
+  <path d="M150 420 L220 180 L280 120 L340 160 L320 250 L280 280 L280 420 Z" fill="url(#grad)" />
+  <path d="M220 180 L200 120 L260 60 L320 80 L280 120 Z" fill="url(#grad)" />
+  <path d="M280 120 L360 80 L340 160 Z" fill="#0a0a0a" />
+  <circle cx="250" cy="110" r="12" fill="#0a0a0a" />
 </svg>
