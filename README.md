@@ -13,14 +13,13 @@
   <p align="center">
     The elite archive of chess gambits. Forget fair play. Master the art of the sacrifice.
     <br />
+    <br />
     <a href="https://gambits.in"><strong>Visit the Live Site »</strong></a>
     <br />
     <br />
     <a href="#about-the-project">About</a>
     ·
-    <a href="#vision">Vision</a>
-    ·
-    <a href="#roadmap">Roadmap</a>
+    <a href="#philosophy">Philosophy</a>
     ·
     <a href="#author">Author</a>
   </p>
@@ -30,53 +29,32 @@
 
 ## ♟️ About The Project
 
-Gambits.in is a high-performance, conversion-focused landing page for an upcoming chess education platform dedicated to the art of the sacrifice. This project serves as the initial pre-launch waitlist to gather interest for the "ultimate interactive library for chess gambits."
+**Gambits.in** is the upcoming training ground for the boldest players on the board. 
 
-Built with a focus on **minimalism**, **performance**, and **aesthetic depth**, the site features a custom interactive background that simulates the neural pathways of tactical calculation.
+While modern engines strive for "0.00" equality, we believe chess is a battle of psychology and will. This project serves as the pre-launch waitlist for a platform dedicated entirely to the art of the gambit—where material is temporary, but initiative is forever.
 
-### Key Features
+**Current Status:** Pre-launch (2026)
 
-*   **Interactive Visuals**: A custom-built, mouse-reactive "neural network" background simulating tactical calculations with fluid particle physics.
-*   **Performance First**: Highly optimized static build with minimal bundle size using Next.js App Router.
-*   **Conversion Optimization**: Integrated email capture form for waitlist management.
-*   **Responsive Design**: Mobile-first approach ensuring perfect rendering across all devices.
+## 🕯️ Philosophy: The Art of Sacrifice
 
-## 🚀 Vision
+> "You must take your opponent into a deep dark forest where 2+2=5, and the path leading out is only wide enough for one." — **Mikhail Tal**
 
-The vision for **Gambits.in** is to evolve into the premier destination for aggressive chess players. Unlike traditional platforms that focus on solid, positional play, Gambits.in will be the home for the risk-takers.
+In an era dominated by engine preparation and dry positional play, we are bringing back the fire of the Romantic era. Gambits.in is not for those who seek safety. It is for the players who:
 
-> "To play a gambit is to say: I am willing to lose in order to win."
+*   Prefer chaos over order.
+*   Understand that a sacrifice is not just a calculation, but a declaration of intent.
+*   Seek to create complications that engines despise but humans crumble under.
 
-We aim to build a startup that offers:
-1.  **Interactive Repertoire Training**: Learn complex gambit lines through spaced repetition.
-2.  **Sacrifice Engine**: A specific tactical trainer focused purely on material sacrifices.
-3.  **Community**: A network of players who prefer the sharpest lines in chess.
-
-**Domain Ownership**: The domain `gambits.in` is owned by Ripuranjan Baruah. We are currently in the pre-seed / prototyping phase.
-
-## 🗺️ Roadmap
-
-- [x] **Phase 1: Brand Identity & Landing Page**
-    - [x] Secure domain `gambits.in`
-    - [x] Develop high-performance waitlist page
-    - [x] Establish visual identity (Logo, Palette, Typography)
-- [ ] **Phase 2: Community Building**
-    - [ ] Launch email newsletter with weekly gambit analysis
-    - [ ] Grow social media presence
-- [ ] **Phase 3: Beta Platform Launch**
-    - [ ] Release "Gambit Explorer" MVP
-    - [ ] User authentication and progress tracking
-    - [ ] Premium course integration
+We are building the home for the "Magicians" of the next generation.
 
 ## 🛠️ Technology Stack
 
-This project is built with the latest modern web technologies to ensure speed, scalability, and developer experience.
+This repository contains the source code for the high-performance landing page, showcasing modern web development practices:
 
-*   **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
-*   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-*   **Animation**: HTML5 Canvas (Custom implementation)
-*   **Language**: TypeScript
-*   **Deployment**: Vercel
+*   **Framework**: Next.js 14 (App Router)
+*   **Styling**: Tailwind CSS for a minimalist, dark aesthetic.
+*   **Visuals**: Custom HTML5 Canvas implementation for the "Neural Tactics" background.
+*   **Performance**: Static export optimized for edge delivery on Vercel.
 
 ## 👤 Author
 
