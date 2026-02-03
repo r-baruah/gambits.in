@@ -24,9 +24,12 @@ export default function Home() {
 
       <div className="z-10 w-full">
         <Footer 
-          copyrightText="© 2026 Gambits"
-          authorName="Ripuranjan Baruah"
-          authorUrl="https://twitter.com/ripuranjan"
+          copyrightText="© 2026 Gambits.in"
+          links={[
+            { label: "Ripuranjan", url: "https://ripu.vercel.app" },
+            { label: "GitHub", url: "https://github.com/r-baruah" },
+            { label: "Contact", url: "mailto:r.baruah.work@gmail.com" } // Best guess or placeholder
+          ]}
         />
       </div>
     </main>
