@@ -18,7 +18,7 @@ export default function Home() {
         
         <EmailCapture 
           ctaText="Join the waitlist for early beta access"
-          formAction="https://formspree.io/f/placeholder" // TODO: Replace with actual Formspree ID
+          formAction="https://formspree.io/f/mlglqygk"
         />
       </div>
 
@@ -28,7 +28,7 @@ export default function Home() {
           links={[
             { label: "Ripuranjan", url: "https://ripu.vercel.app" },
             { label: "GitHub", url: "https://github.com/r-baruah" },
-            { label: "Contact", url: "mailto:r.baruah.work@gmail.com" } // Best guess or placeholder
+            { label: "Contact", url: "mailto:ripuranjanbaruah@gmail.com" } // Best guess or placeholder
           ]}
         />
       </div>
