@@ -62,7 +62,7 @@ This repository contains the source code for the high-performance landing page, 
 
 *   **Portfolio**: [ripu.vercel.app](https://ripu.vercel.app)
 *   **GitHub**: [@r-baruah](https://github.com/r-baruah)
-*   **Contact**: [r.baruah.work@gmail.com](mailto:r.baruah.work@gmail.com)
+*   **Contact**: [ripuranjanbaruah@gmail.com](mailto:ripuranjanbaruah@gmail.com)
 
 ---
 
