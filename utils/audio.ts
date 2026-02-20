@@ -86,24 +86,31 @@ export const playSlam = () => {
     if (!audioCtx) return;
 
     const t = audioCtx.currentTime;
+    const isMobile = typeof window !== 'undefined' && window.matchMedia("(hover: none)").matches;
 
     // Deep resonant boom
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
 
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(200, t);
-    osc.frequency.exponentialRampToValueAtTime(20, t + 0.5);
+    // Mobile speakers cannot reproduce 20-30Hz bass well, so we lift it to 300Hz -> 80Hz
+    const startFreq = isMobile ? 350 : 200;
+    const endFreq = isMobile ? 80 : 20;
+
+    osc.frequency.setValueAtTime(startFreq, t);
+    osc.frequency.exponentialRampToValueAtTime(endFreq, t + 0.5);
 
     gain.gain.setValueAtTime(0, t);
-    gain.gain.linearRampToValueAtTime(3, t + 0.02);
+    gain.gain.linearRampToValueAtTime(isMobile ? 1.5 : 3, t + 0.02); // Less gain peaking on mobile
     gain.gain.exponentialRampToValueAtTime(0.01, t + 1.2);
 
     const distortion = audioCtx.createWaveShaper();
     const curve = new Float32Array(400);
     for (let i = 0; i < 400; ++i) {
         const x = i * 2 / 400 - 1;
-        curve[i] = (3 + 10) * x * 20 * (Math.PI / 180) / (Math.PI + 10 * Math.abs(x));
+        // Softer distortion curve on mobile to prevent nasty clipping on cheap speakers
+        const k = isMobile ? 15 : 20;
+        curve[i] = (3 + 10) * x * k * (Math.PI / 180) / (Math.PI + 10 * Math.abs(x));
     }
     distortion.curve = curve;
     distortion.oversample = '4x';
@@ -120,6 +127,9 @@ export const playSlam = () => {
 };
 
 const speakEpicQuote = () => {
+    // TODO: Integrate Premium ElevenLabs/OpenAI TTS API here in the future.
+    // Example: fetch('/api/tts', {body: quote}).then(playAudio)
+
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         // Stop any ongoing speech
         window.speechSynthesis.cancel();

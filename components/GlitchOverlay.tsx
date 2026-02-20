@@ -17,7 +17,7 @@ export const GlitchOverlay = ({ active, onComplete }: { active: boolean; onCompl
             setClip(EPIC_CLIPS[Math.floor(Math.random() * EPIC_CLIPS.length)]);
             const timer = setTimeout(() => {
                 onComplete();
-            }, 1500); // Overlay lasts for 1.5 seconds
+            }, 3000); // Overlay lasts for 3 full seconds of glitchy glory
             return () => clearTimeout(timer);
         }
     }, [active, onComplete]);

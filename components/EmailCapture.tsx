@@ -80,7 +80,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({ ctaText, formAction }) => {
             isSubmitted: true,
             email: '',
           }));
-        }, 1500); // Wait for sequence
+        }, 3000); // Wait for the full 3 second glitch sequence
       } else {
         const data = await response.json().catch(() => ({}));
         setTimeout(() => {
@@ -89,7 +89,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({ ctaText, formAction }) => {
             isSubmitting: false,
             error: data.error || 'Something went wrong. Please try again.',
           }));
-        }, 1500);
+        }, 3000);
       }
     } catch (err) {
       if (!formAction || formAction === '#') {
@@ -100,7 +100,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({ ctaText, formAction }) => {
             isSubmitted: true,
             email: '',
           }));
-        }, 1500);
+        }, 3000);
         return;
       }
 
@@ -110,7 +110,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({ ctaText, formAction }) => {
           isSubmitting: false,
           error: 'Network error. Please try again later.',
         }));
-      }, 1500);
+      }, 3000);
     }
   };
 
