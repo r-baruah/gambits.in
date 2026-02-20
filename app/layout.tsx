@@ -36,6 +36,8 @@ export const metadata: Metadata = {
   },
 };
 
+import SpotlightCursor from "@/components/SpotlightCursor";
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -50,8 +52,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${inter.variable} font-sans antialiased bg-background text-foreground min-h-screen`}
+        className={`${inter.variable} font-sans antialiased bg-background text-foreground min-h-screen relative`}
       >
+        <SpotlightCursor />
         {children}
       </body>
     </html>

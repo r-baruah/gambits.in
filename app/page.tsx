@@ -11,19 +11,19 @@ export default function Home() {
 
       {/* Spacer for vertical centering */}
       <div className="flex-1 flex flex-col items-center justify-center w-full max-w-4xl gap-12 md:gap-16 py-12 md:py-0 z-10">
-        <Hero 
+        <Hero
           headline="Victory favors the bold."
           subheadline="The elite archive of chess gambits. Forget fair play. Master the art of the sacrifice."
         />
-        
-        <EmailCapture 
+
+        <EmailCapture
           ctaText="Join the waitlist for early beta access"
           formAction="https://formspree.io/f/mlglqygk"
         />
       </div>
 
       <div className="z-10 w-full">
-        <Footer 
+        <Footer
           copyrightText="© 2026 Gambits.in"
           links={[
             { label: "Ripuranjan", url: "https://ripu.vercel.app" },

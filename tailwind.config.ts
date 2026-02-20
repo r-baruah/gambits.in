@@ -14,8 +14,8 @@ const config: Config = {
         secondary: "#121212",
         foreground: "#ffffff",
         muted: "#a1a1aa",
-        accent: "#22c55e",
-        "accent-hover": "#16a34a",
+        accent: "#dc2626", // Blood red/dark red
+        "accent-hover": "#b91c1c",
         error: "#ef4444",
         success: "#10b981",
         border: "#27272a",

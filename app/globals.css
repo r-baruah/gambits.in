@@ -9,8 +9,8 @@
   --secondary: #121212;
   --foreground: #ffffff;
   --muted: #a1a1aa;
-  --accent: #22c55e;
-  --accent-hover: #16a34a;
+  --accent: #dc2626;
+  --accent-hover: #b91c1c;
   --error: #ef4444;
   --success: #10b981;
 }
@@ -19,20 +19,26 @@
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
+    cursor: none;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold tracking-tight;
   }
-  
+
   h1 {
     @apply text-4xl md:text-6xl font-extrabold;
   }
-  
+
   p {
     @apply text-base md:text-lg leading-relaxed;
   }
@@ -42,15 +48,15 @@
   .btn-primary {
     @apply bg-accent hover:bg-accent-hover text-background font-semibold px-6 py-3 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background;
   }
-  
+
   .input-field {
     @apply bg-secondary border border-muted/20 text-foreground px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200;
   }
-  
+
   .error-text {
     @apply text-error text-sm mt-1;
   }
-  
+
   .success-text {
     @apply text-success text-sm mt-1;
   }
@@ -60,7 +66,7 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .container-center {
     @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
   }
