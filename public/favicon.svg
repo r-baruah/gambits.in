@@ -1,13 +1,46 @@
-<svg width="32" height="32" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#16a34a;stop-opacity:1" />
+    <linearGradient id="gold-metallic" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5e6c8" />
+      <stop offset="40%" stop-color="#c9a84c" />
+      <stop offset="100%" stop-color="#8b6914" />
     </linearGradient>
   </defs>
-  <path d="M120 440 L392 440 L412 470 L100 470 Z" fill="url(#grad)" />
-  <path d="M150 420 L220 180 L280 120 L340 160 L320 250 L280 280 L280 420 Z" fill="url(#grad)" />
-  <path d="M220 180 L200 120 L260 60 L320 80 L280 120 Z" fill="url(#grad)" />
-  <path d="M280 120 L360 80 L340 160 Z" fill="#0a0a0a" />
-  <circle cx="250" cy="110" r="12" fill="#0a0a0a" />
+  <g transform="skewX(-6) translate(2, 0)">
+    <!-- Shadow -->
+    <text
+      x="24"
+      y="35"
+      text-anchor="middle"
+      fill="#100d05"
+      font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+      font-weight="900"
+      font-size="32"
+    >
+      G
+    </text>
+    
+    <!-- Main G -->
+    <text
+      x="24"
+      y="33"
+      text-anchor="middle"
+      fill="url(#gold-metallic)"
+      stroke="#1a1508"
+      stroke-width="0.5"
+      font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+      font-weight="900"
+      font-size="32"
+    >
+      G
+    </text>
+  </g>
+  
+  <!-- Slash -->
+  <path
+    d="M 38 10 L 10 38"
+    stroke="url(#gold-metallic)"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
 </svg>

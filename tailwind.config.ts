@@ -10,15 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0a0a0a",
-        secondary: "#121212",
-        foreground: "#ffffff",
-        muted: "#a1a1aa",
-        accent: "#dc2626", // Blood red/dark red
-        "accent-hover": "#b91c1c",
-        error: "#ef4444",
-        success: "#10b981",
-        border: "#27272a",
+        background: "#040b0d", // Deep dark teal/black
+        secondary: "#0a1a1c",
+        foreground: "#f8fafc",
+        muted: "#475569",
+        accent: "#e32029", // Striking red from the new logo
+        "accent-hover": "#c81d24",
+        error: "#dc2626",
+        success: "#059669",
+        border: "#132c2e",
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],

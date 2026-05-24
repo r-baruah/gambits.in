@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { playClack, playSlam } from '@/utils/audio';
-import { GlitchOverlay } from './GlitchOverlay';
 
 interface EmailCaptureProps {
   ctaText: string;
@@ -23,17 +21,10 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({ ctaText, formAction }) => {
     isSubmitted: false,
     error: null,
   });
-  const [isFlashing, setIsFlashing] = useState(false);
 
   const validateEmail = (email: string): boolean => {
     const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return re.test(email);
-  };
-
-  const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormState((prev) => ({ ...prev, email: e.target.value, error: null }));
-    // A sharp piece clack on every keystroke
-    playClack();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,116 +49,109 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({ ctaText, formAction }) => {
       return;
     }
 
-    // Trigger the WOW cinematic sequence
-    setIsFlashing(true);
-    playSlam();
-
     try {
       const response = await fetch(formAction, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          Accept: 'application/json',
         },
         body: JSON.stringify({ email: formState.email }),
       });
 
       if (response.ok) {
-        setTimeout(() => {
-          setFormState((prev) => ({
-            ...prev,
-            isSubmitting: false,
-            isSubmitted: true,
-            email: '',
-          }));
-        }, 3000); // Wait for the full 3 second glitch sequence
-      } else {
-        const data = await response.json().catch(() => ({}));
-        setTimeout(() => {
-          setFormState((prev) => ({
-            ...prev,
-            isSubmitting: false,
-            error: data.error || 'Something went wrong. Please try again.',
-          }));
-        }, 3000);
-      }
-    } catch (err) {
-      if (!formAction || formAction === '#') {
-        setTimeout(() => {
-          setFormState((prev) => ({
-            ...prev,
-            isSubmitting: false,
-            isSubmitted: true,
-            email: '',
-          }));
-        }, 3000);
-        return;
-      }
-
-      setTimeout(() => {
         setFormState((prev) => ({
           ...prev,
           isSubmitting: false,
-          error: 'Network error. Please try again later.',
+          isSubmitted: true,
+          email: '',
         }));
-      }, 3000);
+      } else {
+        const data = await response.json().catch(() => ({}));
+        setFormState((prev) => ({
+          ...prev,
+          isSubmitting: false,
+          error: data.error || 'Something went wrong. Try again.',
+        }));
+      }
+    } catch {
+      if (!formAction || formAction === '#') {
+        setFormState((prev) => ({
+          ...prev,
+          isSubmitting: false,
+          isSubmitted: true,
+          email: '',
+        }));
+        return;
+      }
+
+      setFormState((prev) => ({
+        ...prev,
+        isSubmitting: false,
+        error: 'Network error. Try again later.',
+      }));
     }
   };
 
   return (
     <>
-      <GlitchOverlay active={isFlashing} onComplete={() => setIsFlashing(false)} />
-
       {!formState.isSubmitted ? (
-        <div className={`w-full max-w-md mx-auto transition-opacity duration-300 ${isFlashing ? 'opacity-0' : 'opacity-100'}`}>
+        <div className="w-full max-w-md">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-4"
             noValidate
           >
             <div className="flex flex-col gap-2">
-              <div className="relative group">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  className={`input-field w-full ${formState.error ? 'border-error focus:ring-error' : ''}`}
-                  value={formState.email}
-                  onChange={handleType}
-                  disabled={formState.isSubmitting}
-                  aria-label="Email address"
-                  aria-invalid={!!formState.error}
-                />
-              </div>
+              <input
+                type="email"
+                name="email"
+                placeholder="your@email.com"
+                className={`input-field w-full ${formState.error ? 'border-error focus:ring-1 focus:ring-error' : ''}`}
+                value={formState.email}
+                onChange={(e) =>
+                  setFormState((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                    error: null,
+                  }))
+                }
+                disabled={formState.isSubmitting}
+                aria-label="Email address"
+                aria-invalid={!!formState.error}
+              />
               {formState.error && (
-                <p className="error-text animate-slide-up" role="alert">{formState.error}</p>
+                <p className="error-text animate-slide-up" role="alert">
+                  {formState.error}
+                </p>
               )}
             </div>
 
             <button
               type="submit"
               disabled={formState.isSubmitting}
-              className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider text-sm"
-              onMouseEnter={() => playClack()}
+              className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed tracking-wider text-sm uppercase"
             >
-              {formState.isSubmitting ? 'Verifying Sacrifice...' : ctaText}
+              {formState.isSubmitting ? 'Sending...' : ctaText}
             </button>
           </form>
-          <p className="text-xs text-muted/70 text-center mt-4">
-            A confirmation clack means the piece moves.
-          </p>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center p-6 bg-secondary/50 rounded-lg border border-success/20 animate-fade-in w-full max-w-md mx-auto">
-          <div className="text-accent text-2xl font-bold mb-2 tracking-widest uppercase">Checkmate.</div>
-          <p className="text-muted/80 text-center text-sm md:text-base mb-4">
-            Your sacrifice was historically sound. The arbiter expects you.
+        <div className="flex flex-col items-start justify-center p-8 bg-secondary/80 border-l-2 border-accent clip-angled w-full max-w-md relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-accent/20"></div>
+          <p className="text-foreground text-xl font-bold uppercase tracking-wider mb-2">
+            You&apos;re in.
+          </p>
+          <p className="text-muted text-sm mb-6 font-mono">
+            // AUTHORIZATION GRANTED. AWAITING SIGNAL.
           </p>
           <button
-            onClick={() => setFormState(prev => ({ ...prev, isSubmitted: false }))}
-            className="mt-4 text-xs font-mono text-muted hover:text-white transition-colors underline"
+            onClick={() =>
+              setFormState((prev) => ({ ...prev, isSubmitted: false }))
+            }
+            className="text-xs font-mono text-accent hover:text-accent-hover transition-colors uppercase tracking-widest border-b border-accent/30 pb-1"
           >
-            initiate_new()
+            [ NEW CONNECTION ]
           </button>
         </div>
       )}

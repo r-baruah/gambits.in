@@ -9,12 +9,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Gambits - Master the Art of the Sacrifice",
-  description: "The ultimate interactive library for chess gambits and tactical training. Don't just exchange pieces. Sacrifice them.",
-  keywords: ["chess", "gambits", "tactics", "training", "sacrifice", "chess education"],
+  title: "Gambits.in — for the gambiteers",
+  description: "A home for chess players who'd rather sac a piece than play it safe. Gambits, traps, and the kind of chaos engines hate.",
+  keywords: ["chess", "gambits", "tactics", "training", "sacrifice", "chess openings"],
   authors: [{ name: "Ripuranjan" }],
   creator: "Ripuranjan",
-  publisher: "Gambits",
+  publisher: "Gambits.in",
   robots: "index, follow",
   icons: {
     icon: [
@@ -23,20 +23,20 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg",
   },
   openGraph: {
-    title: "Gambits - Master the Art of the Sacrifice",
-    description: "The ultimate interactive library for chess gambits and tactical training. Don't just exchange pieces. Sacrifice them.",
+    title: "Gambits.in — for the gambiteers",
+    description: "A home for chess players who'd rather sac a piece than play it safe. Gambits, traps, and the kind of chaos engines hate.",
     type: "website",
     locale: "en_US",
-    siteName: "Gambits",
+    siteName: "Gambits.in",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gambits - Master the Art of the Sacrifice",
-    description: "The ultimate interactive library for chess gambits and tactical training. Don't just exchange pieces. Sacrifice them.",
+    title: "Gambits.in — for the gambiteers",
+    description: "A home for chess players who'd rather sac a piece than play it safe. Gambits, traps, and the kind of chaos engines hate.",
   },
 };
 
-import SpotlightCursor from "@/components/SpotlightCursor";
+
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -54,7 +54,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans antialiased bg-background text-foreground min-h-screen relative`}
       >
-        <SpotlightCursor />
         {children}
       </body>
     </html>

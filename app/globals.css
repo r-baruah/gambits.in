@@ -1,16 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0a;
-  --secondary: #121212;
-  --foreground: #ffffff;
-  --muted: #a1a1aa;
-  --accent: #dc2626;
-  --accent-hover: #b91c1c;
+  --background: #020608; /* Even darker, almost pure black */
+  --secondary: #0a1a1c;
+  --foreground: #f8fafc;
+  --muted: #64748b;
+  --accent: #e32029;
+  --accent-hover: #ff2a35;
+  --notation: #183335;
+  --notation-glow: #e32029;
   --error: #ef4444;
   --success: #10b981;
 }
@@ -23,20 +25,20 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
-    cursor: none;
+    /* Subtle overall CRT scanline effect */
+    background-image: 
+      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+      linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 3px 100%;
+    z-index: -1;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-bold tracking-tight;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight uppercase;
   }
 
   h1 {
-    @apply text-4xl md:text-6xl font-extrabold;
+    @apply text-5xl md:text-7xl lg:text-8xl font-black;
   }
 
   p {
@@ -45,20 +47,36 @@
 }
 
 @layer components {
+  /* Cyberpunk / Gaming Button */
   .btn-primary {
-    @apply bg-accent hover:bg-accent-hover text-background font-semibold px-6 py-3 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background;
+    @apply relative overflow-hidden bg-background border-2 border-accent text-accent font-black tracking-widest px-8 py-4 transition-all duration-300 focus:outline-none uppercase;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+  
+  .btn-primary:hover {
+    @apply bg-accent text-background shadow-[0_0_25px_rgba(227,32,41,0.6)];
   }
 
+  /* Glitchy Hover Effect Layer for Button */
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s ease;
+  }
+  .btn-primary:hover::before {
+    left: 100%;
+  }
+
+  /* Cyberpunk Input Field */
   .input-field {
-    @apply bg-secondary border border-muted/20 text-foreground px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors duration-200;
+    @apply bg-secondary/50 border-b-2 border-l-2 border-t-0 border-r-0 border-muted text-foreground px-4 py-4 focus:outline-none focus:border-accent transition-all duration-300 font-mono tracking-wider text-sm;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
   }
 
   .error-text {
-    @apply text-error text-sm mt-1;
-  }
-
-  .success-text {
-    @apply text-success text-sm mt-1;
+    @apply text-error text-xs font-mono uppercase mt-2;
   }
 }
 
@@ -66,8 +84,93 @@
   .text-balance {
     text-wrap: balance;
   }
-
-  .container-center {
-    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  
+  /* Hard angled clip-path for generic containers */
+  .clip-angled {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
   }
+
+  .clip-angled-br {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+  }
+  
+  .clip-angled-tl {
+    clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%, 0 30px);
+  }
+}
+
+/* Animations */
+@keyframes drift-up {
+  0% { transform: translateY(105vh) rotate(var(--rot, 0deg)); }
+  100% { transform: translateY(-20vh) rotate(var(--rot, 0deg)); }
+}
+.animate-drift-up {
+  animation: drift-up var(--duration, 60s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes notation-pulse {
+  0%, 100% { color: var(--notation); opacity: var(--base-opacity, 0.05); text-shadow: none; }
+  10%, 20% { color: var(--notation-glow); opacity: 0.22; text-shadow: 0 0 10px rgba(227, 32, 41, 0.6); }
+  30%, 95% { color: var(--notation); opacity: var(--base-opacity, 0.05); text-shadow: none; }
+}
+.animate-notation-pulse {
+  animation: notation-pulse var(--pulse-duration, 15s) ease-in-out infinite;
+  animation-delay: var(--pulse-delay, 0s);
+}
+
+@keyframes smoke-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(70px, -50px) scale(1.1); }
+  66% { transform: translate(-40px, 30px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+.animate-smoke-drift {
+  animation: smoke-drift var(--smoke-duration, 30s) ease-in-out infinite;
+}
+
+/* Static Glitch effect for images/gifs */
+@keyframes glitch-anim {
+  0% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, 2px); }
+  20% { clip-path: inset(80% 0 1% 0); transform: translate(2px, -2px); }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(2px, 2px); }
+  60% { clip-path: inset(1% 0 80% 0); transform: translate(-2px, -2px); }
+  80% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 2px); }
+  100% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, -2px); }
+}
+.animate-glitch {
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+/* Cursor blink for terminal aesthetic */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* Scrolling ticker for data feed */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-ticker {
+  animation: ticker-scroll 60s linear infinite;
+}
+
+/* Fade in up entrance */
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+/* Custom selection colors */
+::selection {
+  background: rgba(227, 32, 41, 0.3);
+  color: #f8fafc;
 }

@@ -21,8 +21,7 @@ const Footer: React.FC<FooterProps> = ({ copyrightText, links }) => {
             <React.Fragment key={link.label}>
               <a
                 href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(link.url.startsWith('/') ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                 className="font-medium text-foreground hover:text-accent transition-colors underline decoration-dotted underline-offset-4"
               >
                 {link.label}
